@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'main_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int currentPage = 0;
   final PageController pageController = new PageController(initialPage: 0);
   
+  //Función para cambiar el título de las páginas
   String tituloDePagina(int currentPage){
 
       String s = "";
@@ -29,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //* scaffold principal
     return  Scaffold(
          appBar: AppBar(
           title: Text(tituloDePagina(currentPage)),
@@ -59,11 +62,11 @@ class _HomeScreenState extends State<HomeScreen> {
           unselectedItemColor: Colors.white.withOpacity(0.5),
           elevation: 0,
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.verified_user),
-            label: 'Usuario'
+            BottomNavigationBarItem(icon: Icon(Icons.travel_explore),
+            label: 'Elementos'
             ),
-            BottomNavigationBarItem(icon: Icon(Icons.settings),
-            label: 'Configuracion'
+            BottomNavigationBarItem(icon: Icon(Icons.person),
+            label: 'Autores'
             ),
           ],
           ),
@@ -71,66 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class mainScreen extends StatelessWidget {
-
-    final Color color;
-    const mainScreen({ required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    
-    
-    return GridView.count(
-      crossAxisCount: 3,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            color: color,
-            border: Border.all(
-              width: 5,
-              color: Colors.cyan,
-            ),
-          ),
-          child: Image(
-            image: AssetImage('elements/grass.png'),
-            height: 5,
-            width: 5,
-          ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            color: color,
-            border: Border.all(
-              width: 5,
-              color: Colors.cyan,
-            ),
-          ),
-          child: Image(
-            image: AssetImage('elements/normal.png'),
-            height: 5,
-            width: 5,
-          ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            color: color,
-            border: Border.all(
-              width: 5,
-              color: Colors.cyan,
-            ),
-          ),
-          child: Image(
-            image: AssetImage('elements/water.png'),
-            height: 5,
-            width: 5,
-          ),
-        ),
-      ],
-      
-    );
-  }
-}
-
+//Página de los autores
 class customScreen extends StatelessWidget {
 
   final Color color;
