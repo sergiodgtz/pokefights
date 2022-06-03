@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
            controller: pageController,
            physics: NeverScrollableScrollPhysics(),
           children: [
-            mainScreen(color: Colors.orangeAccent),
+            mainScreen(color: Colors.cyan),
             customScreen(color: Colors.cyan)
           ],
          ),
