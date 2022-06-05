@@ -97,7 +97,7 @@ class customScreen extends StatelessWidget {
           ),    
         ),
         new Container(
-          child: Text('Gutierrez Sergio\nGamiño Luis\nSebastian Zazueta\nMekibes Meza Malik\nÁngel Gonzalez',
+          child: Text('Gutierrez Sergio\nGamiño Luis\nZazueta Sebastian\nMekibes Malik\n Oropeza Ángel',
           textAlign: TextAlign.center,
           overflow:  TextOverflow.clip,
           style: new TextStyle(color: Colors.white, fontSize: 35),
