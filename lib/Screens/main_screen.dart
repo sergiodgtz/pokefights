@@ -4,6 +4,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'info_screen.dart';
 
+var imagenes= ["bug.PNG", "dark.PNG", "dragon.PNG", "electric.PNG", "fairy.PNG", "fighting.PNG", "fire.PNG", "flying.PNG"];
+
 class mainScreen extends StatelessWidget {
 
     final Color color;
@@ -11,23 +13,21 @@ class mainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+    List<Widget> typeElement = [];
+
+    for(var i = 0; i<imagenes.length; i++){
+      typeElement.insert(i, ImagenElemento(imagen_elemento: "elements/"+imagenes[i], color: Colors.orangeAccent, id: i+1));
+    }
     
     return Container(
       color: color,
       child: GridView.count(
         crossAxisCount: 3,
-        children: [
-          ImagenElemento(imagen_elemento: 'elements/grass.png', color: Colors.orangeAccent),
-          ImagenElemento(imagen_elemento: 'elements/normal.png', color: Colors.orangeAccent),
-          ImagenElemento(imagen_elemento: 'elements/fire.png', color: Colors.orangeAccent),
-          ImagenElemento(imagen_elemento: 'elements/fairy.png', color: Colors.orangeAccent)
-        ],
+        children: typeElement,
         
       ),
     );
-  } //*TODO
-  //Crear ciclo for para iterar imágenes y id
+  } 
 }
 
 class ImagenElemento extends StatefulWidget {
