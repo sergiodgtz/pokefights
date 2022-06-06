@@ -62,11 +62,11 @@ class _HomeScreenState extends State<HomeScreen> {
           unselectedItemColor: Colors.white.withOpacity(0.5),
           elevation: 0,
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.travel_explore),
+            BottomNavigationBarItem(icon: Icon(Icons.air_rounded),
             label: 'Elementos'
             ),
-            BottomNavigationBarItem(icon: Icon(Icons.person),
-            label: 'Autores'
+            BottomNavigationBarItem(icon: Icon(Icons.developer_mode_rounded),
+            label: 'Desarrolladores'
             ),
           ],
           ),
@@ -100,7 +100,7 @@ class customScreen extends StatelessWidget {
           child: Text('Gutierrez Sergio\nGamiño Luis\nZazueta Sebastian\nMekibes Malik\n Oropeza Ángel',
           textAlign: TextAlign.center,
           overflow:  TextOverflow.clip,
-          style: new TextStyle(color: Colors.white, fontSize: 35),
+          style: new TextStyle(color: Colors.white, fontSize: 25),
           
         ),
       ),
