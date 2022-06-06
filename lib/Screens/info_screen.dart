@@ -1,7 +1,8 @@
-import 'dart:html';
 import 'dart:io';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:pokefights/services/remote_services.dart';
+import 'package:pokefights/models/type.dart';
 
 class statScreen extends StatefulWidget {
   statScreen({Key? key}) : super(key: key);
@@ -11,6 +12,36 @@ class statScreen extends StatefulWidget {
 }
 
 class _statScreenState extends State<statScreen> {
+  var isLoaded = false;
+  Type? type;
+
+  @override
+  void initState() {
+    super.initState();
+    
+    // get Data from pokeapi
+    getData();
+  }
+
+  getData() async{
+    type = await RemoteService().getType("bug");
+    if (type != null){
+      setState(() {
+        isLoaded = true;
+      });
+    }
+  }
+
+  List<String> dmgToList(List<Generation> dmg){
+    List<String> strList = [];
+
+    for(var i = 0; i<dmg.length; i++){
+      strList.add(dmg[i].name!);
+    }
+
+    return strList;
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +53,14 @@ class _statScreenState extends State<statScreen> {
           title: Text("Atrás"),
       ),
       body: // EJEMPLO DE COMO FUNCIONA LA CLASE DE CARD FINAL
-       cardFinal(type: "normal", doubleDmgTo: ["fairy", "muamuamua"], halfDmgTo: ["hello"] , noDmgTo: ["yes"], doubleDmgFrom: ["wew"], halfDmgFrom: ["uwu"], noDmgFrom: ["ewe"]),
+       cardFinal(
+        type: type!.name!,
+        doubleDmgTo: dmgToList(type!.damageRelations!.doubleDamageTo!), 
+        halfDmgTo: dmgToList(type!.damageRelations!.halfDamageTo!) , 
+        noDmgTo: dmgToList(type!.damageRelations!.noDamageTo!), 
+        doubleDmgFrom: dmgToList(type!.damageRelations!.doubleDamageFrom!), 
+        halfDmgFrom: dmgToList(type!.damageRelations!.halfDamageFrom!), 
+        noDmgFrom: dmgToList(type!.damageRelations!.noDamageFrom!)),
     );
   }
 }

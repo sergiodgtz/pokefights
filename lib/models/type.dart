@@ -60,16 +60,16 @@ class DamageRelations {
     List<Generation>? doubleDamageTo;
     List<Generation>? halfDamageFrom;
     List<Generation>? halfDamageTo;
-    List<dynamic>? noDamageFrom;
-    List<dynamic>? noDamageTo;
+    List<Generation>? noDamageFrom;
+    List<Generation>? noDamageTo;
 
     factory DamageRelations.fromJson(Map<String, dynamic> json) => DamageRelations(
         doubleDamageFrom: List<Generation>.from(json["double_damage_from"].map((x) => Generation.fromJson(x))),
         doubleDamageTo: List<Generation>.from(json["double_damage_to"].map((x) => Generation.fromJson(x))),
         halfDamageFrom: List<Generation>.from(json["half_damage_from"].map((x) => Generation.fromJson(x))),
         halfDamageTo: List<Generation>.from(json["half_damage_to"].map((x) => Generation.fromJson(x))),
-        noDamageFrom: List<dynamic>.from(json["no_damage_from"].map((x) => x)),
-        noDamageTo: List<dynamic>.from(json["no_damage_to"].map((x) => x)),
+        noDamageFrom: List<Generation>.from(json["no_damage_from"].map((x) => x)),
+        noDamageTo: List<Generation>.from(json["no_damage_to"].map((x) => x)),
     );
 
 }

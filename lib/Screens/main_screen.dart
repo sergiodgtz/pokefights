@@ -1,10 +1,8 @@
-import 'dart:html';
 import 'dart:io';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'info_screen.dart';
 
-var imagenes= ["bug.PNG", "dark.PNG", "dragon.PNG", "electric.PNG", "fairy.PNG", "fighting.PNG", "fire.PNG", "flying.PNG"];
+var imagenes= ["bug.PNG", "dark.PNG", "dragon.PNG", "electric.PNG", "fairy.PNG", "fighting.PNG", "fire.PNG", "flying.PNG", "ghost.PNG", "grass.PNG", "ground.PNG", "ice.PNG", "normal.PNG", "poison.PNG", "psychic.PNG", "rock.PNG", "steel.PNG", "water.PNG"];
 
 class mainScreen extends StatelessWidget {
 
@@ -24,6 +22,8 @@ class mainScreen extends StatelessWidget {
       child: GridView.count(
         crossAxisCount: 3,
         children: typeElement,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 15,
         
       ),
     );
@@ -57,11 +57,11 @@ class _ImagenElementoState extends State<ImagenElemento> {
       },
       child: Container(
             decoration: BoxDecoration(
-              color: Colors.orangeAccent,
-              borderRadius: BorderRadius.circular(30),
+              color: Colors.teal,
+              borderRadius: BorderRadius.circular(100),
               border: Border.all(
-                width: 5,
-                color: Colors.cyan,
+                width: 15,
+                color: Color.fromARGB(255, 195, 187, 33), 
               ),
             ),
             child: AnimatedOpacity(
@@ -69,6 +69,7 @@ class _ImagenElementoState extends State<ImagenElemento> {
               opacity: 1.0,
               child: Image.asset(
                 widget.imagen_elemento,
+                fit: BoxFit.contain,
               ),
             ),
           ),
