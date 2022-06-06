@@ -21,9 +21,9 @@ class _HomeScreenState extends State<HomeScreen> {
       String s = "";
 
       if(currentPage == 0)
-        s = "Tipos de Pokémon y sus características!";
+        s = "Tipos de Pokemon";
       else
-        s = "Autores de la aplicación";
+        s = "Desarrolladores";
 
       return s;
 
@@ -34,8 +34,15 @@ class _HomeScreenState extends State<HomeScreen> {
     //* scaffold principal
     return  Scaffold(
          appBar: AppBar(
-          title: Text(tituloDePagina(currentPage)),
-          backgroundColor: Colors.cyan,
+          title: Text(
+            tituloDePagina(currentPage),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w900
+              ),
+          ),
+          backgroundColor: Color.fromARGB(255, 6, 106, 119),
           elevation: 0,
         ),
          body:
@@ -62,11 +69,11 @@ class _HomeScreenState extends State<HomeScreen> {
           unselectedItemColor: Colors.white.withOpacity(0.5),
           elevation: 0,
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.travel_explore),
+            BottomNavigationBarItem(icon: Icon(Icons.air_rounded),
             label: 'Elementos'
             ),
-            BottomNavigationBarItem(icon: Icon(Icons.person),
-            label: 'Autores'
+            BottomNavigationBarItem(icon: Icon(Icons.developer_mode_rounded),
+            label: 'Desarrolladores'
             ),
           ],
           ),
@@ -85,27 +92,76 @@ class customScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: color,
-      child: new Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: 
-        [
-        new Container(
-          alignment: Alignment.topCenter,
-          child: Text("Autores",
-          style: TextStyle(color: Colors.white, fontSize: 35),
-          textAlign: TextAlign.center,
-          ),    
-        ),
-        new Container(
-          child: Text('Gutierrez Sergio\nGamiño Luis\nZazueta Sebastian\nMekibes Malik\n Oropeza Ángel',
-          textAlign: TextAlign.center,
-          overflow:  TextOverflow.clip,
-          style: new TextStyle(color: Colors.white, fontSize: 35),
-          
-        ),
-      ),
-        ] 
-    )
+      child: ListView(
+        padding: const EdgeInsets.all(8),
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Color.fromARGB(255, 0, 0, 0),
+                width: 4
+              ),
+              color: Colors.red[500],
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(200),
+                topRight: Radius.circular(200),
+              )
+            ),
+            height: 200,
+            child: const Center(
+              child: Text(
+                'Gamiño Gonzales Jose Luis\n\n\nGutierrez Sergio',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w900
+                  ),
+                )
+              ),
+          ),
+          Container(
+            height: 25,
+            color: Colors.black,
+            child: const Center(
+              child: Text(
+                'Mekibes Malok',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w900,
+                  backgroundColor: Colors.white,
+                  height: 2,
+                  wordSpacing: 5,
+                  
+                  ),
+                )
+              ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Color.fromARGB(255, 0, 0, 0),
+                width: 4
+              ),
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(200),
+                bottomRight: Radius.circular(200),
+              )
+            ),
+            height: 200,
+            child: const Center(child: Text(
+              'Oropeza Castañeda Angel Eduardo\n\n\nZazueta Sebastian',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w900
+                )
+              )
+            ),
+          ),
+        ],
+      )
     );
   }
 }
