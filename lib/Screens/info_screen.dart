@@ -4,122 +4,174 @@ import 'package:flutter/material.dart';
 import 'package:pokefights/services/remote_services.dart';
 import 'package:pokefights/models/type.dart';
 
+var tipos = [
+  [1, "bug"],
+  [2, "dark"],
+  [4, "electric"],
+  [5, "fairy"],
+  [6, "fighting"],
+  [7, "fire"],
+  [8, "flying"],
+  [9, "ghost"],
+  [10, "grass"],
+  [11, "ground"],
+  [12, "ice"],
+  [13, "normal"],
+  [14, "poison"],
+  [15, "psychic"],
+  [16, "rock"],
+  [17, "steel"],
+  [18, "water"]
+];
+String parametro = '';
+List<String> urls = [];
+
 class statScreen extends StatefulWidget {
-  statScreen({Key? key}) : super(key: key);
+  int id;
+
+  statScreen(this.id);
 
   @override
   State<statScreen> createState() => _statScreenState();
 }
 
 class _statScreenState extends State<statScreen> {
+  _statScreenState();
   var isLoaded = false;
   Type? type;
 
   @override
   void initState() {
     super.initState();
-    
+
     // get Data from pokeapi
     getData();
   }
 
-  getData() async{
-    type = await RemoteService().getType("bug");
-    if (type != null){
+  getData() async {
+    for (var i = 0; i < tipos.length; i++) {
+      if (tipos[i][0] == widget.id) {
+        parametro = tipos[i][1].toString();
+      }
+    }
+    type = await RemoteService().getType(parametro);
+    if (type != null) {
       setState(() {
         isLoaded = true;
       });
     }
+
+    for (int i = 1; i < 7; i++) {
+      var poke = type!.pokemon![i].pokemon!;
+      var pokeurl = poke.url.toString();
+      var pokemonID = pokeurl.substring(34, pokeurl.length - 1);
+      urls.add(pokemonID);
+    }
   }
 
-  List<String> dmgToList(List<Generation> dmg){
+  List<String> dmgToList(List<Generation> dmg) {
     List<String> strList = [];
 
-    for(var i = 0; i<dmg.length; i++){
+    for (var i = 0; i < dmg.length; i++) {
       strList.add(dmg[i].name!);
     }
 
     return strList;
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.cyan,
       appBar: AppBar(
         leading: new IconButton(
-          onPressed: () => Navigator.pop(context), 
-          icon: Icon(Icons.arrow_back)),
-          title: Text("Atrás"),
+            onPressed: () => Navigator.pop(context),
+            icon: Icon(Icons.arrow_back)),
+        title: Text(parametro),
       ),
       body: // EJEMPLO DE COMO FUNCIONA LA CLASE DE CARD FINAL
-       cardFinal(
-        type: type!.name!,
-        doubleDmgTo: dmgToList(type!.damageRelations!.doubleDamageTo!), 
-        halfDmgTo: dmgToList(type!.damageRelations!.halfDamageTo!) , 
-        noDmgTo: dmgToList(type!.damageRelations!.noDamageTo!), 
-        doubleDmgFrom: dmgToList(type!.damageRelations!.doubleDamageFrom!), 
-        halfDmgFrom: dmgToList(type!.damageRelations!.halfDamageFrom!), 
-        noDmgFrom: dmgToList(type!.damageRelations!.noDamageFrom!)),
+          cardFinal(
+              type: type!.name ?? 'default',
+              doubleDmgTo: dmgToList(type!.damageRelations!.doubleDamageTo!),
+              halfDmgTo: dmgToList(type!.damageRelations!.halfDamageTo!),
+              noDmgTo: dmgToList(type!.damageRelations!.noDamageTo!),
+              doubleDmgFrom:
+                  dmgToList(type!.damageRelations!.doubleDamageFrom!),
+              halfDmgFrom: dmgToList(type!.damageRelations!.halfDamageFrom!),
+              noDmgFrom: dmgToList(type!.damageRelations!.noDamageFrom!)),
     );
   }
 }
 
 //Gridview de tarjetas
 class cardFinal extends StatelessWidget {
+  List<Widget> cardArray = [];
 
-  List<cardType> cardArray = [];
+  final String type;
+  final List<String> doubleDmgTo;
+  final List<String> halfDmgTo;
+  final List<String> noDmgTo;
+  final List<String> doubleDmgFrom;
+  final List<String> halfDmgFrom;
+  final List<String> noDmgFrom;
 
-   final String type;
-   final  List<String>doubleDmgTo;
-   final  List<String>halfDmgTo;
-   final  List<String>noDmgTo;
-   final  List<String>doubleDmgFrom;
-   final  List<String>halfDmgFrom;
-   final  List<String>noDmgFrom;
-
-  cardFinal({required this.type, required this.doubleDmgTo,
-     required this.halfDmgTo, required this.noDmgTo, required this.doubleDmgFrom,
-       required this.halfDmgFrom ,required this.noDmgFrom});
-
+  cardFinal(
+      {required this.type,
+      required this.doubleDmgTo,
+      required this.halfDmgTo,
+      required this.noDmgTo,
+      required this.doubleDmgFrom,
+      required this.halfDmgFrom,
+      required this.noDmgFrom});
 
   @override
   Widget build(BuildContext context) {
-
-    return GridView.count(crossAxisCount: 2,
-      mainAxisSpacing: 10,
-      crossAxisSpacing: 10,
-      padding: const EdgeInsets.all(20),
-      children: 
-        createGrid(cardArray, type, doubleDmgTo, halfDmgTo, noDmgTo, doubleDmgFrom, halfDmgFrom, noDmgFrom)
-    );
+    return GridView.count(
+        crossAxisCount: 2,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        padding: const EdgeInsets.all(20),
+        children: createGrid(cardArray, type, doubleDmgTo, halfDmgTo, noDmgTo,
+            doubleDmgFrom, halfDmgFrom, noDmgFrom));
   }
 
-  List<Widget> createGrid(List<cardType> cardArray, String type, List<String> doubleDmgTo, List<String> halfDmgTo,
-    List<String> noDmgTo, List<String> doubleDmgFrom, List<String> halfDmgFrom, List<String> noDmgFrom ){
-    
-      int counter = 1;
-      cardArray.add(cardType(dmgType: type, index: counter, datos: doubleDmgTo));
+  List<Widget> createGrid(
+      List<Widget> cardArray,
+      String type,
+      List<String> doubleDmgTo,
+      List<String> halfDmgTo,
+      List<String> noDmgTo,
+      List<String> doubleDmgFrom,
+      List<String> halfDmgFrom,
+      List<String> noDmgFrom) {
+    int counter = 1;
+    cardArray.add(cardType(dmgType: type, index: counter, datos: doubleDmgTo));
+    counter++;
+    cardArray.add(cardType(dmgType: type, index: counter, datos: halfDmgTo));
+    counter++;
+    cardArray.add(cardType(dmgType: type, index: counter, datos: noDmgTo));
+    counter++;
+    cardArray
+        .add(cardType(dmgType: type, index: counter, datos: doubleDmgFrom));
+    counter++;
+    cardArray.add(cardType(dmgType: type, index: counter, datos: halfDmgFrom));
+    counter++;
+    cardArray.add(cardType(dmgType: type, index: counter, datos: noDmgFrom));
+    for (int i = 1; i < 7; i++) {
       counter++;
-      cardArray.add(cardType(dmgType: type, index: counter, datos: halfDmgTo));
-      counter++;
-      cardArray.add(cardType(dmgType: type, index: counter, datos: noDmgTo));
-      counter++;
-      cardArray.add(cardType(dmgType: type, index: counter, datos: doubleDmgFrom));
-      counter++;
-      cardArray.add(cardType(dmgType: type, index: counter, datos: halfDmgFrom));
-      counter++;
-      cardArray.add(cardType(dmgType: type, index: counter, datos: noDmgFrom));
-
+      cardArray.add(cardImage(
+          url:
+              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
+                  urls[i] +
+                  ".png"));
+    }
+    urls = [];
     return cardArray;
   }
-
 }
-
 
 //Elemento simple de Tarjeta
 class cardType extends StatelessWidget {
-
   final int index;
   final String dmgType;
   final List<String> datos;
@@ -130,31 +182,33 @@ class cardType extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     info = creaCardInfo(index, datos);
     return Card(
-      child: ListTile(
-        leading: Icon(Icons.info, color: Colors.white, size: 70),
-        minVerticalPadding: 20,
-        title: Text(info[0],
-          style: TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold )
+        //imagen
+
+        child: ListTile(
+          leading: Icon(Icons.info, color: Colors.white, size: 70),
+          minVerticalPadding: 20,
+          title: Text(info[0],
+              style: TextStyle(
+                  fontSize: 30,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold)),
+          hoverColor: Colors.cyan,
+          subtitle: Text(info[1],
+              style: TextStyle(
+                fontSize: 30,
+                color: Colors.white,
+                fontWeight: FontWeight.w100,
+              )),
         ),
-        hoverColor: Colors.cyan,
-        subtitle: Text(info[1],
-        style: TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.w100,  )
-        ),
-        
-        ),
-      color: Colors.orangeAccent,
-      shape: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: Colors.orangeAccent)
-      )
-    );
+        color: Colors.orangeAccent,
+        shape: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: Colors.orangeAccent)));
   }
 
-  List<String> creaCardInfo(int i, List<String> lista){
-
+  List<String> creaCardInfo(int i, List<String> lista) {
     List<String> s = [];
     String elementos = "";
 
@@ -174,7 +228,7 @@ class cardType extends StatelessWidget {
           elementos += "${lista[i]}\n";
         }
         s.add(elementos);
-        
+
         break;
       case 3:
         s.add("No le hace daño a:\n");
@@ -190,6 +244,7 @@ class cardType extends StatelessWidget {
           elementos += "${lista[i]}\n";
         }
         s.add(elementos);
+
         break;
 
       case 5:
@@ -212,5 +267,26 @@ class cardType extends StatelessWidget {
 
     return s;
   }
+}
 
+class cardImage extends StatelessWidget {
+  final String url;
+
+  cardImage({required this.url});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+        //imagen
+
+        child: Image.network(
+          url,
+          fit: BoxFit.contain,
+          width: 200,
+        ),
+        color: Color.fromARGB(255, 255, 0, 0),
+        shape: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(1000),
+            borderSide: BorderSide(color: Color.fromARGB(255, 255, 0, 0))));
+  }
 }
