@@ -5,15 +5,22 @@ import 'package:pokefights/services/remote_services.dart';
 import 'package:pokefights/models/type.dart';
 
 class statScreen extends StatefulWidget {
-  statScreen({Key? key}) : super(key: key);
+
+  final String tipo;
+
+  statScreen({required this.tipo});
 
   @override
-  State<statScreen> createState() => _statScreenState();
+  State<statScreen> createState() => _statScreenState(tipo: tipo);
 }
 
 class _statScreenState extends State<statScreen> {
   var isLoaded = false;
   Type? type;
+  final String tipo;
+
+  _statScreenState({required this.tipo});
+
 
   @override
   void initState() {
@@ -52,7 +59,8 @@ class _statScreenState extends State<statScreen> {
           icon: Icon(Icons.arrow_back)),
           title: Text("Atrás"),
       ),
-      body: // EJEMPLO DE COMO FUNCIONA LA CLASE DE CARD FINAL
+      body: 
+       FutureBuilder<>// EJEMPLO DE COMO FUNCIONA LA CLASE DE CARD FINAL
        cardFinal(
         type: type!.name!,
         doubleDmgTo: dmgToList(type!.damageRelations!.doubleDamageTo!), 

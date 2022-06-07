@@ -52,7 +52,7 @@ class _ImagenElementoState extends State<ImagenElemento> {
         print("Container ${widget.imagen_elemento} was tapped!");
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => statScreen()),
+          MaterialPageRoute(builder: (context) => statScreen(tipo: "bug")),
          );
       },
       child: Container(
