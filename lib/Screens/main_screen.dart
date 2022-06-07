@@ -4,23 +4,9 @@ import 'info_screen.dart';
 
 var imagenes = [
   "bug.PNG",
-  "dark.PNG",
-  "dragon.PNG",
-  "electric.PNG",
-  "fairy.PNG",
-  "fighting.PNG",
   "fire.PNG",
-  "flying.PNG",
-  "ghost.PNG",
   "grass.PNG",
-  "ground.PNG",
-  "ice.PNG",
-  "normal.PNG",
-  "poison.PNG",
-  "psychic.PNG",
   "rock.PNG",
-  "steel.PNG",
-  "water.PNG"
 ];
 
 class mainScreen extends StatelessWidget {

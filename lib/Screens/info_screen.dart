@@ -3,25 +3,14 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pokefights/services/remote_services.dart';
 import 'package:pokefights/models/type.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 var tipos = [
   [1, "bug"],
-  [2, "dark"],
-  [4, "electric"],
-  [5, "fairy"],
-  [6, "fighting"],
-  [7, "fire"],
-  [8, "flying"],
-  [9, "ghost"],
-  [10, "grass"],
-  [11, "ground"],
-  [12, "ice"],
-  [13, "normal"],
-  [14, "poison"],
-  [15, "psychic"],
-  [16, "rock"],
-  [17, "steel"],
-  [18, "water"]
+  [2, "fire"],
+  [3, "grass"],
+  [4, "rock"],
+
 ];
 String parametro = '';
 List<String> urls = [];
@@ -187,20 +176,23 @@ class cardType extends StatelessWidget {
         //imagen
 
         child: ListTile(
-          leading: Icon(Icons.info, color: Colors.white, size: 70),
+          leading: Icon(Icons.info, color: Colors.white, size: 40),
           minVerticalPadding: 20,
-          title: Text(info[0],
+          title: AutoSizeText(info[0],
               style: TextStyle(
-                  fontSize: 30,
                   color: Colors.white,
-                  fontWeight: FontWeight.bold)),
+                  fontWeight: FontWeight.bold),
+              presetFontSizes: [20, 16, 14],
+                  ),
           hoverColor: Colors.cyan,
-          subtitle: Text(info[1],
+          subtitle: AutoSizeText(info[1],
               style: TextStyle(
-                fontSize: 30,
                 color: Colors.white,
                 fontWeight: FontWeight.w100,
-              )),
+              ),
+              presetFontSizes: [20, 16, 14],
+              maxLines: 5,
+              ),
         ),
         color: Colors.orangeAccent,
         shape: OutlineInputBorder(
@@ -216,50 +208,62 @@ class cardType extends StatelessWidget {
       case 1:
         s.add("Hace el doble de daño a:\n");
         for (var i = 0; i < lista.length; i++) {
-          elementos += "${lista[i]}\n";
+          elementos += "${lista[i]} ";
         }
         s.add(elementos);
+        if(s[1] == "")
+          s[1] = "N/A";
 
         break;
 
       case 2:
         s.add("Hace la mitad de daño a:\n");
         for (var i = 0; i < lista.length; i++) {
-          elementos += "${lista[i]}\n";
+          elementos += "${lista[i]} ";
         }
-        s.add(elementos);
+                s.add(elementos);
+        if(s[1] == "")
+          s[1] = "N/A";
 
         break;
       case 3:
         s.add("No le hace daño a:\n");
         for (var i = 0; i < lista.length; i++) {
-          elementos += "${lista[i]}\n";
+          elementos += "${lista[i]} ";
         }
         s.add(elementos);
+        if(s[1] == "")
+          s[1] = "N/A";
         break;
 
       case 4:
         s.add("Recibe el doble de daño de: \n");
         for (var i = 0; i < lista.length; i++) {
-          elementos += "${lista[i]}\n";
+          elementos += "${lista[i]} ";
         }
-        s.add(elementos);
+               s.add(elementos);
+        if(s[1] == "")
+          s[1] = "N/A";
 
         break;
 
       case 5:
         s.add("Recibe la mitad de daño de: \n");
         for (var i = 0; i < lista.length; i++) {
-          elementos += "${lista[i]}\n";
+          elementos += "${lista[i]} ";
         }
         s.add(elementos);
+        if(s[1] == "")
+          s[1] = "N/A";
         break;
       case 6:
         s.add("No recibe daño de: \n");
         for (var i = 0; i < lista.length; i++) {
-          elementos += "${lista[i]}\n";
+          elementos += "${lista[i]} ";
         }
         s.add(elementos);
+        if(s[1] == "")
+          s[1] = "N/A";
         break;
 
       default:
