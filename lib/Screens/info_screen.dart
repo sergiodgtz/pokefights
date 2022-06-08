@@ -134,18 +134,18 @@ class cardFinal extends StatelessWidget {
       List<String> halfDmgFrom,
       List<String> noDmgFrom) {
     int counter = 1;
-    cardArray.add(cardType(dmgType: type, index: counter, datos: doubleDmgTo));
+    cardArray.add(cardType(dmgType: type, index: counter, datos: doubleDmgTo, color: Colors.orangeAccent));
     counter++;
-    cardArray.add(cardType(dmgType: type, index: counter, datos: halfDmgTo));
+    cardArray.add(cardType(dmgType: type, index: counter, datos: halfDmgTo, color: Colors.greenAccent));
     counter++;
-    cardArray.add(cardType(dmgType: type, index: counter, datos: noDmgTo));
+    cardArray.add(cardType(dmgType: type, index: counter, datos: noDmgTo, color: Colors.blueAccent));
     counter++;
     cardArray
-        .add(cardType(dmgType: type, index: counter, datos: doubleDmgFrom));
+        .add(cardType(dmgType: type, index: counter, datos: doubleDmgFrom, color: Colors.purpleAccent));
     counter++;
-    cardArray.add(cardType(dmgType: type, index: counter, datos: halfDmgFrom));
+    cardArray.add(cardType(dmgType: type, index: counter, datos: halfDmgFrom, color: Colors.redAccent));
     counter++;
-    cardArray.add(cardType(dmgType: type, index: counter, datos: noDmgFrom));
+    cardArray.add(cardType(dmgType: type, index: counter, datos: noDmgFrom, color: Colors.amberAccent));
     for (int i = 1; i < 7; i++) {
       counter++;
       cardArray.add(cardImage(
@@ -164,8 +164,9 @@ class cardType extends StatelessWidget {
   final int index;
   final String dmgType;
   final List<String> datos;
+  final MaterialAccentColor color;
 
-  cardType({required this.dmgType, required this.index, required this.datos});
+  cardType({required this.dmgType, required this.index, required this.datos, required this.color});
 
   List<String> info = [];
 
@@ -194,9 +195,9 @@ class cardType extends StatelessWidget {
               maxLines: 5,
               ),
         ),
-        color: Colors.orangeAccent,
+        color: this.color,
         shape: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(20),
             borderSide: BorderSide(color: Colors.orangeAccent)));
   }
 
