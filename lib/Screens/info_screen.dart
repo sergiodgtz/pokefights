@@ -10,7 +10,8 @@ var tipos = [
   [2, "fire"],
   [3, "grass"],
   [4, "rock"],
-
+  [5, "water"],
+  [6, "ice"]
 ];
 String parametro = '';
 List<String> urls = [];
@@ -146,7 +147,7 @@ class cardFinal extends StatelessWidget {
     cardArray.add(cardType(dmgType: type, index: counter, datos: halfDmgFrom, color: Colors.redAccent));
     counter++;
     cardArray.add(cardType(dmgType: type, index: counter, datos: noDmgFrom, color: Colors.amberAccent));
-    for (int i = 1; i < 7; i++) {
+    for (int i = 0; i < 6; i++) {
       counter++;
       cardArray.add(cardImage(
           url:

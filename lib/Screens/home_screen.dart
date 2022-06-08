@@ -110,7 +110,7 @@ class customScreen extends StatelessWidget {
             height: 200,
             child: const Center(
               child: Text(
-                'Gamiño Gonzales Jose Luis\n\n\nGutierrez Sergio',
+                'Gamiño Gonzales Jose Luis\n\n\nGutierrez Chavez Sergio Daniel',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,
@@ -124,7 +124,7 @@ class customScreen extends StatelessWidget {
             color: Colors.black,
             child: const Center(
               child: Text(
-                'Mekibes Malok',
+                'Mekibes Meza Malik',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.black,
@@ -151,7 +151,7 @@ class customScreen extends StatelessWidget {
             ),
             height: 200,
             child: const Center(child: Text(
-              'Oropeza Castañeda Angel Eduardo\n\n\nZazueta Sebastian',
+              'Oropeza Castañeda Angel Eduardo\n\n\nZazueta Barajas Sebastian',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.black,

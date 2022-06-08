@@ -7,6 +7,8 @@ var imagenes = [
   "fire.PNG",
   "grass.PNG",
   "rock.PNG",
+  "water.PNG",
+  "ice.PNG"
 ];
 
 class mainScreen extends StatelessWidget {
@@ -29,7 +31,7 @@ class mainScreen extends StatelessWidget {
     return Container(
       color: color,
       child: GridView.count(
-        crossAxisCount: 3,
+        crossAxisCount: 2,
         children: typeElement,
         crossAxisSpacing: 10,
         mainAxisSpacing: 15,
